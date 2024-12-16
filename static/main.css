@@ -1,0 +1,149 @@
+@font-face {
+    font-family: "gilroy";
+    src: url(../static/gilroy/Gilroy-Regular.ttf);
+}
+
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "gilroy";
+}
+
+.container
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+body
+{
+    background: url('../static/bg-show.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    padding: 1.2em;
+}
+
+#header
+{
+    font-size: 1.2em;
+    padding: 1em;
+    margin-bottom: 1em;
+    text-align: center;
+    border-bottom: 1px solid #fff;
+    width: 50%;
+    margin: auto;
+}
+
+#about
+{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    border: 1px solid #fff;
+    padding: 2em;
+    width: 50%;
+    margin: auto;
+    background-color: #ffffff15;
+    box-shadow: rgba(255, 255, 255, 0.3) 0px 19px 38px, rgba(255, 255, 255, 0.22) 0px 10px 10px;
+    opacity: 1;
+}
+
+#desc
+{
+    font-family: PP Woodland;
+    margin: auto;
+    text-transform: uppercase;
+    padding: 1em;
+    text-align: center;
+    font-weight: 600;
+    font-size: 2em;
+}
+
+#about h3
+{
+    font-size: 1.4em;
+    padding: 1.2em;
+    font-weight: 600;
+    word-spacing: 0.4em;
+    /* text-align: center; */
+}
+
+#about h4
+{
+    font-size: 1.4em;
+    padding: 1.2em;
+    font-weight: 600;
+}
+
+#about ul
+{
+    font-size: 1.2em;
+    padding: 1.2em;
+    font-weight: 600;
+}
+
+#about li
+{
+    padding: 0.4em;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+button
+{
+    padding: 1em 2.5em;
+    border-radius: 10px;
+    font-size: 1.2em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+button:hover
+{
+    box-shadow: rgba(123, 123, 123, 0.886) 0px 3px 8px;
+    transform: scale(1.2);
+}
+
+button a
+{
+    text-decoration: none;
+    font-family: PP Woodland;
+    font-weight: 600;
+    letter-spacing: 0.5em;
+    color: #000;
+    text-transform: uppercase;
+}
+
+
+#team h3
+{
+    text-align: center;
+    margin-top: 1em;
+    border: 1px solid #fff;
+    padding: 0.8em;
+    margin-bottom: 1em;
+    font-weight: 600;
+    font-size: 1.5em;
+}
+
+#team .member
+{
+    display: flex;
+    padding: 0.4em;
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
+
+footer
+{
+    text-align: center;
+    font-size: 1.4em;
+    margin-top: 2em;
+    padding: 1em;
+}

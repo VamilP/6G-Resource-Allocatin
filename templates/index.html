@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Prediction</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="icon" href="/static/icon.png" type="image/x-icon" />
+</head>
+<body>
+    <div id="header">
+        6G Resource Allocation
+    </div>
+    <div id="blur-background"></div>
+    <div id="form" style="font-family:'Open Sans Condensed', sans-serif; width: 800px; min-width: 250px; margin: 20px auto; position: relative;">
+        <div class="fieldset" style="box-shadow: rgba(0, 0, 0, 0.75) 20px 21px 67px 0px;">
+            <legend>Optimize your network!</legend>
+            <form id="prediction-form" method="post" action="/predict">
+                <div class="range-slider-container">
+                    <div class="range-slider grad" style='--min:-5; --max:5; --step1:0.000001; --value1:0; --text-value1:0; --prefix1:""'>
+                        <label for="signal-strength">Signal Strength:</label>
+                        <input type="range" min="-5" max="5" step="0.000001" name="Signal_Strength" value="0" id="sliderValue1" oninput="updateSliderValue(this, 1); updateTextFieldValue(this, 1)">
+                        <output id="output1"></output>
+                        <div class="range-slider__value" id="rangeValue1">0</div>
+                        <div class='range-slider__progress'></div>
+                    </div>
+                    <input type="text" id="textFieldValue1" onchange="updateSliderValue(this, 1); updateSlider(this, 1)" value="0">
+                </div>
+
+                <div class="range-slider-container">
+                    <div class="range-slider grad" style='--min:-5; --max:5; --step2:0.000001; --value2:0; --text-value2:0;  --prefix2:""'>
+                        <label for="latency">Latency:</label>
+                        <input type="range" min="-5" max="5" step="0.000001" name="Latency" value="0" id="sliderValue2" oninput="updateSliderValue(this, 2); updateTextFieldValue(this, 2)">
+                        <output id="output2"></output>
+                        <div class="range-slider__value" id="rangeValue2">0</div>
+                        <div class='range-slider__progress'></div>
+                    </div>
+                    <input type="text" id="textFieldValue2" onchange="updateSliderValue(this, 2); updateSlider(this, 2)" value="0">
+                </div>
+
+                <label for="application-type">Application Type:</label><br><br>
+                <div class="checkbox-set">
+                    <label for="background-download" class="container">
+                        <input type="checkbox" id="background-download" name="Application_Type_Background_Download">
+                        <span class="checkmark"></span>
+                        Background Download
+                    </label>
+                    <label for="emergency-service" class="container">
+                        <input type="checkbox" id="emergency-service" name="Application_Type_Emergency_Service">
+                        <span class="checkmark"></span>
+                        Emergency Service
+                    </label>
+                    <label for="file-download" class="container">
+                        <input type="checkbox" id="file-download" name="Application_Type_File_Download">
+                        <span class="checkmark"></span>
+                        File Download
+                    </label>
+                    <label for="iot-temperature" class="container">
+                        <input type="checkbox" id="iot-temperature" name="Application_Type_IoT_Temperature">
+                        <span class="checkmark"></span>
+                        IoT Temperature
+                    </label>
+                </div>
+                <br>
+
+                <div class="checkbox-set">
+                    <label for="online-gaming" class="container">
+                        <input type="checkbox" id="online-gaming" name="Application_Type_Online_Gaming">
+                        <span class="checkmark"></span>
+                        Online Gaming
+                    </label>
+                    <label for="streaming" class="container">
+                        <input type="checkbox" id="streaming" name="Application_Type_Streaming">
+                        <span class="checkmark"></span>
+                        Streaming
+                    </label>
+                    <label for="video-call" class="container">
+                        <input type="checkbox" id="video-call" name="Application_Type_Video_Call">
+                        <span class="checkmark"></span>
+                        Video Call
+                    </label>
+                    <label for="video-streaming" class="container">
+                        <input type="checkbox" id="video-streaming" name="Application_Type_Video_Streaming">
+                        <span class="checkmark"></span>
+                        Video Streaming
+                    </label>
+                </div>
+                <br>
+
+                <div class="checkbox-set">
+                    <label for="voip-call" class="container">
+                        <input type="checkbox" id="voip-call" name="Application_Type_VoIP_Call">
+                        <span class="checkmark"></span>
+                        VoIP Call
+                    </label>
+                    <label for="voice-call" class="container">
+                        <input type="checkbox">
+                        <input type="checkbox" id="voice-call" name="Application_Type_Voice_Call">
+                        <span class="checkmark"></span>
+                        Voice Call
+                    </label>
+                    <label for="web-browsing" class="container">
+                        <input type="checkbox" id="web-browsing" name="Application_Type_Web_Browsing">
+                        <span class="checkmark"></span>
+                        Web Browsing
+                    </label>
+                </div>
+
+                <div class="range-slider-container">
+                    <div class="range-slider grad" style='--min:0; --max:5; --step3:0.01; --value3:0; --text-value3:0; --prefix3:""'>
+                        <label for="bandwidth-utilization">Bandwidth Utilization:</label>
+                        <input type="range" min="0" max="5" step="0.01" name="Bandwidth_Utilization_Ratio" value="0" id="sliderValue3" oninput="updateSliderValue(this, 3); updateTextFieldValue(this, 3)">
+                        <output id="output3"></output>
+                        <div class="range-slider__value" id="rangeValue3">0</div>
+                        <div class='range-slider__progress'></div>
+                    </div>
+                    <input type="text" id="textFieldValue3" onchange="updateSliderValue(this, 3); updateSlider(this, 3)" value="0">
+                </div>
+
+                <button type="submit">Predict</button>
+                <div id="prediction-result"></div>
+            </form>
+        </div>
+    </div>
+    <img id="result-graph" src="" alt="Resource Allocation Graph" style="display: none; width: fit-content;" />
+    <script src="/static/script.js"></script>
+    <script>
+        document.getElementById('prediction-form').onsubmit = async function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            document.getElementById('prediction-result').innerText = 'Prediction: ' + result.prediction.join(', ');
+            const img = document.getElementById('result-graph');
+            img.src = 'data:image/png;base64,' + result.plot_url;
+            img.style.display = 'block';
+        };
+    </script>
+    
+</body>
+</html>
